@@ -3,7 +3,7 @@ const session = require('express-session')
 const app = express()
 const port = 3000
 const exphbs = require('express-handlebars')
-
+const usePassport = require('./config/passport')
 require('./config/mongoose')
 const bodyParser = require('body-parser')
 
@@ -20,6 +20,8 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }))
+
+usePassport(app)
 
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
