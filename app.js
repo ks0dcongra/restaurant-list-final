@@ -1,4 +1,5 @@
 const express = require('express')
+const session = require('express-session')
 const app = express()
 const port = 3000
 const exphbs = require('express-handlebars')
@@ -18,6 +19,12 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 // 設定每一筆請求都會透過 methodOverride 進行前置處理
 app.use(methodOverride('_method'))
+
+app.use(session({
+  secret: 'ThisIsMySecret',
+  resave: false,
+  saveUninitialized: true
+}))
 
 // 將 request 導入路由器
 app.use(routes)
