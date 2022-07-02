@@ -7,7 +7,8 @@ const Restaurant = require('../../models/restaurant')
 
 // 渲染多個餐廳
 router.get('/', (req, res) => {
-  return Restaurant.find() // 取出 Todo model 裡的所有資料
+  const userId = req.user._id
+  return Restaurant.find({ userId }) // 取出 Todo model 裡的所有資料
     .lean() // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
     .sort({ _id: 'desc' }) // desc
     .then(restaurants => res.render('index', { restaurants: restaurants })) // 將資料傳給 index 樣板
@@ -16,6 +17,7 @@ router.get('/', (req, res) => {
 
 // 搜尋多個頁面
 router.get('/search', (req, res) => {
+  const userId = req.user._id
   let keyword = req.query.keywords
   let sort = `'${req.query.option}'`
 
@@ -35,7 +37,7 @@ router.get('/search', (req, res) => {
 
   keyword = keyword.trim().toLowerCase()
 
-  Restaurant.find()
+  Restaurant.find(userId)
     .lean()
     .sort(sort)
     .then(restaurants => {
