@@ -23,17 +23,18 @@
       </a>
       <div class="container">
       </div>
-      <button type="button" class="btn btn-outline-dark"
-        onclick="window.location.href='/restaurants/new'">Create</button>
+
       <a class="navbar-brand" href="/">
         {{#if isAuthenticated}}{{ user.name}}'s {{/if}}
-        Todo List
+        Restaurant List
       </a>
       {{#if isAuthenticated}}
-      <a href="/users/logout" class="btn btn-outline-light">Logout</a>
+      <a href="/users/logout" class="btn btn-outline-dark">Logout</a>
       {{else}}
-      <a href="/users/login" class="btn btn-outline-light">Login</a>
+      <a href="/users/login" class="btn btn-outline-dark">Login</a>
       {{/if}}
+      <button type="button" class="btn btn-outline-dark"
+        onclick="window.location.href='/restaurants/new'">Create</button>
     </nav>
 
 
