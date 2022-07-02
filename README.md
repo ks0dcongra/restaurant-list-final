@@ -50,8 +50,8 @@ CMD顯示 `Express is running on http://localhost:3000` 即啟動完成
 10. 點選`Create`新增餐廳包含上傳圖片、評分、類別、地址等資訊，Google Map 位置會依照輸入之地址產生
 
 ## 系統截圖
-![user1@example.com](https://github.com/ks0dcongra/reataurant-list/blob/master/public/imgur/restaurnt_0.jpg)
-![user2@example.com](https://github.com/ks0dcongra/reataurant-list/blob/master/public/imgur/restaurnt_1.jpg)
+![user1@example.com](https://github.com/ks0dcongra/restaurant-list-final/blob/master/public/imgur/restaurant_0.jpg)
+![user2@example.com](https://github.com/ks0dcongra/restaurant-list-final/blob/master/public/imgur/restaurant_1.jpg)
 ## Acknowledgments
 * AlphaCamp
 
