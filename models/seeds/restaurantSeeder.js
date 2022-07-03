@@ -35,13 +35,11 @@ db.once('open', () => {
 
     .then(user => {
       return Promise.all(
-        user.map(hi => {
-          console.log(hi)
+        user.map(userData => {
           SEED_USER.map(seedUser => {
             restaurantList.map(data => {
-              if (hi.email == seedUser.email && seedUser.restaurantId.includes(data.id)) {
-                data.userId = hi._id
-                console.log(data)
+              if (userData.email == seedUser.email && seedUser.restaurantId.includes(data.id)) {
+                data.userId = userData._id
                 return Restaurant.create(data)
               }
             })
