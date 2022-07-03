@@ -28,14 +28,17 @@
         {{#if isAuthenticated}}{{ user.name}}'s {{/if}}
         Restaurant List
       </a>
-      <div class="mr-3">
-        <button type="button" class="btn btn-outline-dark"
-          onclick="window.location.href='/restaurants/new'">Create</button>
-      </div>
+
       <div>
         {{#if isAuthenticated}}
         <a href="/users/logout" class="btn btn-outline-dark">Logout</a>
+        <div class="m-1 ">
+          <button type="button" class="btn btn-outline-dark"
+            onclick="window.location.href='/restaurants/new'">Create</button>
+        </div>
+
         {{else}}
+
         <a href="/users/login" class="btn btn-outline-dark">Login</a>
         {{/if}}
       </div>

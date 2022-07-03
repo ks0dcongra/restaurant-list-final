@@ -52,7 +52,7 @@ db.once('open', () => {
     .then(() => {
       console.log('done.')
       setTimeout(() => {
-        process.exit();
-      }, "1500")
+        process.exit()
+      }, '1500')
     })
 })
