@@ -7,38 +7,52 @@ const Restaurant = require('../restaurant')
 const User = require('../user')
 const restaurantList = require('../../restaurant.json').results
 const db = require('../../config/mongoose')
-const SEED_USER = {
-  name: 'root',
-  email: 'root@example.com',
-  password: '12345678'
-}
+const SEED_USER = [
+  { name: 'user1', email: 'user1@example.com', password: '12345678', restaurantId: [1, 2, 3] },
+  { name: 'user2', email: 'user2@example.com', password: '12345678', restaurantId: [4, 5, 6] }
+]
 
 // 連線成功
 db.once('open', () => {
-  console.log('mongodb connected!')
   bcrypt
     .genSalt(10)
-    .then(salt => bcrypt.hash(SEED_USER.password, salt))
-    .then(hash => User.create({
-      name: SEED_USER.name,
-      email: SEED_USER.email,
-      password: hash
-    }))
-    .then(user => {
-      const userId = user._id
+    .then(salt => {
       return Promise.all(Array.from(
-        { length: 8 },
-        (_, i) => Restaurant.create({ ...restaurantList[i], userId })
+        { length: 1 },
+        (_, i) => bcrypt.hash(SEED_USER[i].password, salt)
       ))
-      // Restaurant.create({ ...restaurantList, userId })
-      //   .then(() => {
-      //     console.log('restaurantSeeder done!')
-      //   })
-      //   .catch(err => console.log(err))
-      // console.log('done')
+    })
+    .then(hash => {
+      return Promise.all(Array.from(
+        { length: 2 },
+        (_, i) => User.create({
+          name: SEED_USER[i].name,
+          email: SEED_USER[i].email,
+          password: hash[0]
+        })
+      ))
+    })
+
+    .then(user => {
+      return Promise.all(
+        user.map(hi => {
+          console.log(hi)
+          SEED_USER.map(seedUser => {
+            restaurantList.map(data => {
+              if (hi.email == seedUser.email && seedUser.restaurantId.includes(data.id)) {
+                data.userId = hi._id
+                console.log(data)
+                return Restaurant.create(data)
+              }
+            })
+          })
+        })
+      )
     })
     .then(() => {
       console.log('done.')
-      process.exit()
+      setTimeout(() => {
+        process.exit();
+      }, "1500")
     })
 })

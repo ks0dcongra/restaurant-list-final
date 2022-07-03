@@ -13,7 +13,8 @@ const restaurantSchema = new Schema({
   description: { type: String, required: true },
   isDone: {
     type: Boolean,
-    default: false
+    default: false,
+    required: false
   },
   userId: { // 加入關聯設定
     type: Schema.Types.ObjectId,
