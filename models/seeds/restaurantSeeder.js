@@ -12,19 +12,21 @@ const SEED_USER = [
   { name: 'user2', email: 'user2@example.com', password: '12345678', restaurantId: [4, 5, 6] }
 ]
 
+
+
 // 連線成功
 db.once('open', () => {
   bcrypt
     .genSalt(10)
     .then(salt => {
       return Promise.all(Array.from(
-        { length: 1 },
+        { length: SEED_USER.length },
         (_, i) => bcrypt.hash(SEED_USER[i].password, salt)
       ))
     })
     .then(hash => {
       return Promise.all(Array.from(
-        { length: 2 },
+        { length: SEED_USER.length },
         (_, i) => User.create({
           name: SEED_USER[i].name,
           email: SEED_USER[i].email,
